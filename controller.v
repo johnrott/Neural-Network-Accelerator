@@ -1,23 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 10/30/2025 08:52:51 PM
-// Design Name: 
-// Module Name: controller
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
 
 
 module controller(clk, start, reset, done, busy, load_mat, computation);
@@ -37,14 +18,13 @@ module controller(clk, start, reset, done, busy, load_mat, computation);
             state <= nextState;
     end
 
-    // Next-state and outputs (combinational)
     always @(*) begin
         // ---------- SAFE DEFAULTS ----------
-        nextState   = state;  // default stay
+        nextState   = state; 
         load_mat    = 1'b0;
         computation = 1'b0;
         busy        = 1'b0;
-        done        = 1'b0;   // <-- IMPORTANT: prevents latch on 'done'
+        done        = 1'b0;  
 
         case (state)
             idle: begin
@@ -73,7 +53,7 @@ module controller(clk, start, reset, done, busy, load_mat, computation);
                 nextState = idle;
                 // signal completion for exactly one cycle
                 done      = 1'b1;
-                // busy default is 0 here (we’re finishing)
+                // busy default is 0 here (weâ€™re finishing)
             end
 
             default: begin
